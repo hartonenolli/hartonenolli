@@ -41,7 +41,7 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div className="container">
       <p>Hello world</p>
       <p>Message from backend: {messageFromBackend}</p>
       <form onSubmit={handleAddPerson}>
