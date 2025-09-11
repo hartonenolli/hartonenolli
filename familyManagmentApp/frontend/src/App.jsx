@@ -1,23 +1,10 @@
 import { useEffect, useState } from 'react'
-import { Calendar as BigCalendar, dateFnsLocalizer } from 'react-big-calendar'
-import { format, parse, startOfWeek, getDay } from 'date-fns'
-import enUS from 'date-fns/locale/en-US'
-import 'react-big-calendar/lib/css/react-big-calendar.css'
+import Calendar from './components/Calendar'
+import PersonForm from './components/PersonForm'
 
 const App = () => {
-  const [messageFromBackend, setMessageFromBackend] = useState('')
   const [persons, setPersons] = useState([])
   const [newPerson, setNewPerson] = useState({ name: '', age: '' })
-
-  useEffect(() => {
-    const fetchMessage = async () => {
-      const response = await fetch('/api/message')
-      const data = await response.json()
-      setMessageFromBackend(data.message)
-    }
-
-    fetchMessage()
-  }, [])
 
   useEffect(() => {
     const fetchPersons = async () => {
@@ -53,52 +40,10 @@ const App = () => {
     }))
   }
 
-  const Calendar = () => {
-    const locales = { 'en-US': enUS }
-    const localizer = dateFnsLocalizer({
-      format,
-      parse,
-      startOfWeek: () => startOfWeek(new Date(), { weekStartsOn: 1 }),
-      getDay,
-      locales,
-    })
-    return (
-      <div>
-        <h2>Calendar Component</h2>
-        <BigCalendar
-          localizer={localizer}
-          events={[]}
-          startAccessor="start"
-          endAccessor="end"
-          style={{ height: 400 }}
-        />
-      </div>
-    )
-  }
-
   return (
     <div className="container">
-      <p>Hello world</p>
-      <p>Message from backend: {messageFromBackend}</p>
       <Calendar />
-      <h2>Add New Person</h2>
-      <form onSubmit={handleAddPerson}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={newPerson.name}
-          onChange={handleInputChange}
-        />
-        <input
-          type="number"
-          name="age"
-          placeholder="Age"
-          value={newPerson.age}
-          onChange={handleInputChange}
-        />
-        <button type="submit">Add Person</button>
-      </form>
+      <PersonForm handleAddPerson={handleAddPerson} handleInputChange={handleInputChange} newPerson={newPerson} />
       <h2>Persons:</h2>
       <ul>
         {persons.map((person) => (
