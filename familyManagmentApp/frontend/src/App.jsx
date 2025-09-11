@@ -29,6 +29,15 @@ const App = () => {
     event.preventDefault()
     const { name, age } = newPerson
     console.log('Adding person:', { name, age })
+    const response = await fetch('/api/persons', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, age: Number(age) }),
+    })
+    const addedPerson = await response.json()
+    setPersons((prev) => [...prev, addedPerson])
     setNewPerson({ name: '', age: '' })
   }
 

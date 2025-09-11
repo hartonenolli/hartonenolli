@@ -6,6 +6,15 @@ const fs = require('fs');
 const path = require('path');
 
 const personsFile = path.join(__dirname, 'persons.json');
+function generateId() {
+  return Math.random().toString(36).substr(2, 9);
+}
+
+const personSchema = {
+  id: generateId(),
+  name: 'string',
+  age: 'number',
+};
 
 app.use(cors());
 app.use(express.json());
@@ -20,7 +29,7 @@ app.get('/api/persons', (req, res) => {
 });
 
 app.post('/api/persons', (req, res) => {
-  const newPerson = req.body;
+  const newPerson = { id: generateId(), ...req.body };
   const persons = JSON.parse(fs.readFileSync(personsFile, 'utf-8'));
   persons.push(newPerson);
   fs.writeFileSync(personsFile, JSON.stringify(persons, null, 2));
