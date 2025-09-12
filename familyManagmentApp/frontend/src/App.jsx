@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Calendar from './components/Calendar'
 import PersonForm from './components/PersonForm'
+import axios from 'axios'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -8,9 +9,8 @@ const App = () => {
 
   useEffect(() => {
     const fetchPersons = async () => {
-      const response = await fetch('/api/persons')
-      const data = await response.json()
-      setPersons(data)
+      const response = await axios.get('/api/persons')
+      setPersons(response.data)
     }
 
     fetchPersons()
@@ -20,15 +20,9 @@ const App = () => {
     event.preventDefault()
     const { name, age } = newPerson
     console.log('Adding person:', { name, age })
-    const response = await fetch('/api/persons', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name, age: Number(age) }),
-    })
-    const addedPerson = await response.json()
-    setPersons((prev) => [...prev, addedPerson])
+    const response = await axios.post('/api/persons', { name, age: Number(age) })
+    console.log('Response from server:', response.data)
+    setPersons((prev) => [...prev, response.data])
     setNewPerson({ name: '', age: '' })
   }
 
