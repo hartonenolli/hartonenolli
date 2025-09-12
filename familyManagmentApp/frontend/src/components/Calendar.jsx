@@ -12,12 +12,21 @@ const Calendar = () => {
       getDay,
       locales,
     })
+
+    const exampleEvents = [
+      {
+        title: 'Sample Event',
+        start: new Date(),
+        end: new Date(),
+      },
+    ]
+
     return (
       <div>
         <h2>Calendar Component</h2>
         <BigCalendar
           localizer={localizer}
-          events={[]}
+          events={exampleEvents}
           startAccessor="start"
           endAccessor="end"
           style={{ height: 400 }}
