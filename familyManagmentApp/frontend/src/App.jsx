@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import HomePage from './components/HomePage'
 import Calendar from './components/Calendar'
 import PersonForm from './components/PersonForm'
 import axios from 'axios'
@@ -49,22 +51,43 @@ const App = () => {
   }
 
   return (
-    <div className="container">
-      <Calendar events={events} />
-      <PersonForm
-        handleAddPerson={handleAddPerson}
-        handleInputChange={handleInputChange}
-        newPerson={newPerson}
-      />
-      <h2>Persons:</h2>
-      <ul>
-        {persons.map((person) => (
-          <li key={person.id}>
-            {person.name} - {person.age} years old
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Router>
+      <div className="container">
+        <h1>Family Management App</h1>
+        <Link to="/">Home</Link>
+        <Link to="/calendar">Calendar</Link>
+        <Link to="/add-person">Add Person</Link>
+        {/* <Link to="/persons">Persons</Link> */}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/calendar" element={<Calendar events={events} />} />
+          <Route
+            path="/add-person"
+            element={
+              <PersonForm
+                handleAddPerson={handleAddPerson}
+                handleInputChange={handleInputChange}
+                newPerson={newPerson}
+              />
+            }
+          />
+        </Routes>
+        {/* <Calendar events={events} />
+        <PersonForm
+          handleAddPerson={handleAddPerson}
+          handleInputChange={handleInputChange}
+          newPerson={newPerson}
+        /> */}
+        <h2>Persons:</h2>
+        <ul>
+          {persons.map((person) => (
+            <li key={person.id}>
+              {person.name} - {person.age} years old
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Router>
   )
 }
 
