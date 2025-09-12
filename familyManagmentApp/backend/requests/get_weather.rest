@@ -1,0 +1,2 @@
+GET /api/weather?city=London HTTP/1.1
+Host: localhost:3001
