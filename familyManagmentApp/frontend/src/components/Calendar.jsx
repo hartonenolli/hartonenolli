@@ -3,7 +3,7 @@ import { Calendar as BigCalendar, dateFnsLocalizer } from 'react-big-calendar'
 import { format, parse, startOfWeek, getDay } from 'date-fns'
 import enUS from 'date-fns/locale/en-US'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import axios from 'axios'
+import WeatherService from '../services/weather'
 
 
 const Calendar = ({ events }) => {
@@ -11,9 +11,14 @@ const Calendar = ({ events }) => {
 
   useEffect(() => {
     const fetchWeatherData = async () => {
-      const response = await axios.get('/api/weather?city=Helsinki');
-      setWeatherData(response.data);
-      console.log('Weather data response:', response.data);
+      try {
+        const data = await WeatherService('Helsinki');
+        setWeatherData(data);
+        console.log('Weather data response:', data);
+      } catch (error) {
+        console.error('Error fetching weather data:', error);
+      }
+      console.log('Fetching weather data...');
     };
     fetchWeatherData();
   }, [events])
