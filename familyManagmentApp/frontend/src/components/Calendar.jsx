@@ -3,25 +3,29 @@ import { Calendar as BigCalendar, dateFnsLocalizer } from 'react-big-calendar'
 import { format, parse, startOfWeek, getDay } from 'date-fns'
 import enUS from 'date-fns/locale/en-US'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import WeatherService from '../services/weather'
+import { fetchEvents, fetchWeather } from '../requests'
 
-
-const Calendar = ({ events }) => {
-  const [weatherData, setWeatherData] = useState(null);
+const Calendar = () => {
+  const [weatherData, setWeatherData] = useState(null)
+  const [events, setEvents] = useState([])
 
   useEffect(() => {
-    const fetchWeatherData = async () => {
+    const fetchEventData = async () => {
       try {
-        const data = await WeatherService('Helsinki');
-        setWeatherData(data);
-        console.log('Weather data response:', data);
+        const data = await fetchEvents()
+        console.log('Events data response:', data)
+        const eventsObjects = data.map((event) => ({
+          ...event,
+          start: new Date(event.start),
+          end: new Date(event.end),
+        }))
+        setEvents(eventsObjects)
       } catch (error) {
-        console.error('Error fetching weather data:', error);
+        console.error('Error fetching events data:', error)
       }
-      console.log('Fetching weather data...');
-    };
-    fetchWeatherData();
-  }, [events])
+    }
+    fetchEventData()
+  }, [])
 
   const locales = { 'en-US': enUS }
   const localizer = dateFnsLocalizer({
@@ -32,10 +36,9 @@ const Calendar = ({ events }) => {
     locales,
   })
 
-
   const WeatherForToday = () => {
     if (!weatherData) {
-      return <div>Loading weather data...</div>;
+      return <div>Loading weather data...</div>
     }
 
     return (
@@ -56,7 +59,7 @@ const Calendar = ({ events }) => {
 
   return (
     <div>
-      <WeatherForToday />
+      {/* <WeatherForToday /> */}
       <h2>Calendar</h2>
       <BigCalendar
         localizer={localizer}
