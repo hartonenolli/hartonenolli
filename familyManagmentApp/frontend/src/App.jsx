@@ -23,9 +23,9 @@ const App = () => {
     event.preventDefault()
     const { name, age } = newPerson
     console.log('Adding person:', { name, age })
-    const response = await addPerson({ name, age: Number(age) })
-    console.log('Response from server:', response.data)
-    setPersons((prev) => [...prev, response.data])
+    const newAddedPerson = await addPerson({ name, age: Number(age) })
+    console.log('Response from server:', newAddedPerson)
+    setPersons((prev) => [...prev, newAddedPerson])
     setNewPerson({ name: '', age: '' })
   }
 
