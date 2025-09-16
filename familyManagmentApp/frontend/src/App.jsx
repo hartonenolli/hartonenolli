@@ -5,6 +5,7 @@ import HomePage from './components/HomePage'
 import Calendar from './components/Calendar'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import background from './pictures/background.jpg'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -20,12 +21,23 @@ const App = () => {
 
   return (
     <Router>
+      <div style={{ backgroundImage: `url(${background})`, minHeight: '100vh', backgroundSize: 'cover' }}>
       <div className="container">
         <h1>Family Management App</h1>
-        <Link to="/">Home</Link>
-        <Link to="/calendar">Calendar</Link>
-        <Link to="/persons">Persons</Link>
-        <Link to="/add-person">Add Person</Link>
+        <div className='btn-group'>
+        <button type="button" className="btn btn-light">
+          <Link to="/">Home</Link>
+        </button>
+        <button type="button" className="btn btn-light">
+          <Link to="/calendar">Calendar</Link>
+        </button>
+        <button type="button" className="btn btn-light">
+          <Link to="/persons">Persons</Link>
+        </button>
+        <button type="button" className="btn btn-light">
+          <Link to="/add-person">Add Person</Link>
+        </button>
+        </div>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/calendar" element={<Calendar />} />
@@ -44,6 +56,7 @@ const App = () => {
           />
           <Route path="/persons" element={<Persons persons={persons} />} />
         </Routes>
+      </div>
       </div>
     </Router>
   )
