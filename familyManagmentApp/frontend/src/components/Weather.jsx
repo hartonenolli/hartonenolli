@@ -1,25 +1,11 @@
-import { useState, useEffect } from "react";
-import { fetchWeather } from "../requests";
+import { useWeather } from "../hooks/useWeather";
 
 export const Weather = ({ city }) => {
-  const [weatherData, setWeatherData] = useState(null)
+  const weatherData = useWeather(city);
 
-    useEffect(() => {
-        const fetchWeatherData = async () => {
-          try {
-          const data = await fetchWeather(city)
-          console.log('Weather data response:', data)
-          setWeatherData(data)
-          } catch (error) {
-          console.error('Error fetching weather data:', error)
-          }
-        }
-        fetchWeatherData()
-        }, [])
-    
-    if (!weatherData) {
-      return <div>Loading weather data...</div>
-    }
+  if (!weatherData) {
+    return <div>Loading weather data...</div>;
+  }
 
     return (
       <div>
