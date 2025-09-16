@@ -1,33 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Calendar as BigCalendar, dateFnsLocalizer } from 'react-big-calendar'
 import { format, parse, startOfWeek, getDay } from 'date-fns'
 import enUS from 'date-fns/locale/en-US'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import { fetchEvents, addEvent } from '../requests'
-import { Weather } from './Weather'
+import { addEvent } from '../requests'
 import { EventForm } from './EventForm'
+import { Weather } from './Weather'
+import { useEvents } from '../hooks/useEvents'
 
 const Calendar = () => {
-  const [events, setEvents] = useState([])
+  const [events, setEvents] = useEvents()
   const [newEvent, setNewEvent] = useState({ title: '', start: '', end: '' })
-
-  useEffect(() => {
-    const fetchEventData = async () => {
-      try {
-        const data = await fetchEvents()
-        console.log('Events data response:', data)
-        const eventsObjects = data.map((event) => ({
-          ...event,
-          start: new Date(event.start),
-          end: new Date(event.end),
-        }))
-        setEvents(eventsObjects)
-      } catch (error) {
-        console.error('Error fetching events data:', error)
-      }
-    }
-    fetchEventData()
-    }, [])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -42,14 +25,14 @@ const Calendar = () => {
         start: new Date(newEvent.start),
         end: new Date(newEvent.end),
       }
-    const savedEvent = await addEvent(eventToAdd)
-    setEvents((prev) => [
-      ...prev,
-      { ...savedEvent, start: new Date(savedEvent.start), end: new Date(savedEvent.end) },
-    ])
-    setNewEvent({ title: '', start: '', end: ''})
+      const savedEvent = await addEvent(eventToAdd)
+      setEvents((prev) => [
+        ...prev,
+        { ...savedEvent, start: new Date(savedEvent.start), end: new Date(savedEvent.end) },
+      ])
+      setNewEvent({ title: '', start: '', end: '' })
     } catch (error) {
-      console.log('Error adding event', error);
+      console.log('Error adding event', error)
     }
   }
 
@@ -64,8 +47,8 @@ const Calendar = () => {
 
   return (
     <div>
-      <Weather city="Helsinki" />
       <h2>Calendar</h2>
+      <Weather city="Helsinki" />
       <EventForm
         newEvent={newEvent}
         handleInputChange={handleInputChange}
