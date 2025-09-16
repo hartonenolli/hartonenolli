@@ -1,26 +1,26 @@
-import { useState, useEffect } from "react";
-import { fetchEvents } from "../requests";
+import { useState, useEffect } from 'react'
+import { fetchEvents } from '../requests'
 
 export const useEvents = () => {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState([])
 
   useEffect(() => {
     const fetchEventData = async () => {
       try {
-        const data = await fetchEvents();
+        const data = await fetchEvents()
         const eventsObjects = data.map((event) => ({
           ...event,
           start: new Date(event.start),
           end: new Date(event.end),
-        }));
-        setEvents(eventsObjects);
+        }))
+        setEvents(eventsObjects)
       } catch (error) {
-        console.error('Error fetching events data:', error);
+        console.error('Error fetching events data:', error)
       }
-    };
-    fetchEventData();
-  }, []);
+    }
+    fetchEventData()
+  }, [])
 
-  return [events, setEvents];
-};
-export default useEvents;
+  return [events, setEvents]
+}
+export default useEvents

@@ -1,4 +1,24 @@
-const PersonForm = ({ handleAddPerson, handleInputChange, newPerson }) => {
+import { addPerson } from '../requests'
+
+const PersonForm = ({ newPerson, setNewPerson, setPersons }) => {
+  const handleAddPerson = async (event) => {
+    event.preventDefault()
+    const { name, age } = newPerson
+    console.log('Adding person:', { name, age })
+    const newAddedPerson = await addPerson({ name, age: Number(age) })
+    console.log('Response from server:', newAddedPerson)
+    setPersons((prev) => [...prev, newAddedPerson])
+    setNewPerson({ name: '', age: '' })
+  }
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target
+    setNewPerson((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
   return (
     <>
       <h2>Add New Person</h2>

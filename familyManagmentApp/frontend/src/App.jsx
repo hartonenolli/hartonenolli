@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import { addPerson, fetchPersons } from './requests'
+import { fetchPersons } from './requests'
 import HomePage from './components/HomePage'
 import Calendar from './components/Calendar'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
-import axios from 'axios'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -18,24 +17,6 @@ const App = () => {
     }
     getPersons()
   }, [])
-
-  const handleAddPerson = async (event) => {
-    event.preventDefault()
-    const { name, age } = newPerson
-    console.log('Adding person:', { name, age })
-    const newAddedPerson = await addPerson({ name, age: Number(age) })
-    console.log('Response from server:', newAddedPerson)
-    setPersons((prev) => [...prev, newAddedPerson])
-    setNewPerson({ name: '', age: '' })
-  }
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target
-    setNewPerson((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
-  }
 
   return (
     <Router>
@@ -53,9 +34,9 @@ const App = () => {
             element={
               <>
                 <PersonForm
-                  handleAddPerson={handleAddPerson}
-                  handleInputChange={handleInputChange}
                   newPerson={newPerson}
+                  setNewPerson={setNewPerson}
+                  setPersons={setPersons}
                 />
                 <Persons persons={persons} />
               </>

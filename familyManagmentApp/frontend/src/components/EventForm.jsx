@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { addEvent } from '../requests'
 
-
 export const EventForm = ({ events, setEvents }) => {
   const [newEvent, setNewEvent] = useState({ title: '', start: '', end: '' })
 
@@ -21,7 +20,11 @@ export const EventForm = ({ events, setEvents }) => {
       const savedEvent = await addEvent(eventToAdd)
       setEvents((prev) => [
         ...prev,
-        { ...savedEvent, start: new Date(savedEvent.start), end: new Date(savedEvent.end) },
+        {
+          ...savedEvent,
+          start: new Date(savedEvent.start),
+          end: new Date(savedEvent.end),
+        },
       ])
       setNewEvent({ title: '', start: '', end: '' })
     } catch (error) {
@@ -29,7 +32,7 @@ export const EventForm = ({ events, setEvents }) => {
     }
   }
 
-  return (  
+  return (
     <form onSubmit={handleAddEvent}>
       <h3>Add new event:</h3>
       <input
@@ -56,5 +59,5 @@ export const EventForm = ({ events, setEvents }) => {
       />
       <button type="submit">Add Event</button>
     </form>
-  );
+  )
 }
