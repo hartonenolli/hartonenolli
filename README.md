@@ -13,8 +13,8 @@ I am a Bachelor of Science in Computer Science. My interest is in software devel
 
 Working with Github and using programming tools such as Github copilot are also familiar to me.
 
-Here is a [link](https://github.com/hartonenolli) to my main page and to my [LinkedIn](https://www.linkedin.com/in/olli-hartonen-ab915925a/). The software development project [website](https://ilmastokompassi.helsinki.fi/) and the Fullstack [course](https://fullstackopen.com/) github [repository](https://github.com/hartonenolli/fullstack) may also be interesting to look at.
+Here is my [LinkedIn](https://www.linkedin.com/in/olli-hartonen-ab915925a/). The software development project [website](https://ilmastokompassi.helsinki.fi/) and the Fullstack [course](https://fullstackopen.com/) github [repository](https://github.com/hartonenolli/fullstack) may also be interesting to look at.
 
 ## <a id="projects"></a>List of hobby projects
-The hartonenolli repository contains projects in different folders. Inside each folder is a separate README.md file with information about the project. The information includes, among other things, initialization instructions, user manuals, project structure, and images.
-- [FamilyManagmentApp](https://github.com/hartonenolli/hobbyproject/tree/main/familyManagmentApp)
+Below are listed my hobby projects. At the root of the projects are README.md files, which contain information about the project. The information includes, among other things, initialization instructions, user manuals, project structure, and images.
+- [ToolToFamily](https://github.com/hartonenolli/ToolToFamily)
