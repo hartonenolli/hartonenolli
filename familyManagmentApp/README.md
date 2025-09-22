@@ -19,6 +19,9 @@ With multiple children, it can be difficult to remember everything about their s
 | Information   | There is information about birthday, allergies, hobbies.   |
 | Weather  | The application searches for the current weather and suggests suitable clothing.   |
 
+### Graphical information model
+![UML](https://github.com/hartonenolli/hartonenolli/blob/main/familyManagmentApp/frontend/src/pictures/UML.png?raw=true)
+
 ## <a id="installation"></a>Installation
 Installation here.
 
