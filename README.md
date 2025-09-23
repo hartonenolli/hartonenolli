@@ -18,3 +18,4 @@ Here is my [LinkedIn](https://www.linkedin.com/in/olli-hartonen-ab915925a/). The
 ## <a id="projects"></a>List of hobby projects
 Below are listed my hobby projects. At the root of the projects are README.md files, which contain information about the project. The information includes, among other things, initialization instructions, user manuals, project structure, and images.
 - [ToolToFamily](https://github.com/hartonenolli/ToolToFamily)
+- [HourlyWalkExtension](https://github.com/hartonenolli/HourlyWalkExtension)
