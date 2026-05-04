@@ -17,6 +17,7 @@ Here is my [LinkedIn](https://www.linkedin.com/in/olli-hartonen-ab915925a/). The
 
 ## <a id="projects"></a>List of hobby projects
 Below are listed my hobby projects. At the root of the projects are README.md files, which contain information about the project. The information includes, among other things, initialization instructions, user manuals, project structure, and images.
-- [Video-PictureDiary](https://github.com/hartonenolli/Video-PictureDiary)
+- [Demo for robot framework and software architecture](https://github.com/hartonenolli/hartonenolli/IKR)
 - [HourlyWalkExtension](https://github.com/hartonenolli/HourlyWalkExtension)
 - [ToolToFamily](https://github.com/hartonenolli/ToolToFamily)
+- [Video-PictureDiary](https://github.com/hartonenolli/Video-PictureDiary)
